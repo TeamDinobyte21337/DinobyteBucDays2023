@@ -14,7 +14,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
    Pay attention to brackets throughout the program
 */
 @TeleOp (name = "Teleop")
-// erick is a nerd
 public class Teleop extends OpMode {
 
 // To name a Servo or a motor, just type DcMotor or Servo and then what you want to name the Servo/Motor
