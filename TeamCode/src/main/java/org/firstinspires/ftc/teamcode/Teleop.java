@@ -21,11 +21,13 @@ public class Teleop extends OpMode {
     DcMotor backRightMotor;
     DcMotor frontLeftMotor;
     DcMotor backLeftMotor;
-    DcMotor armMotor;
 
-    Servo leftServo;
-    Servo rightServo;
+    DcMotor leftArmMotor;
+    DcMotor rightArmMotor;
 
+
+   Servo leftServo;
+   Servo rightServo;
 
     public void init(){
         // The code within the init statement happens once you press "init" on the driver's hub.
@@ -38,10 +40,11 @@ public class Teleop extends OpMode {
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-       //  armMotor = hardwareMap.dcMotor.get("armMotor");
+        leftArmMotor = hardwareMap.dcMotor.get("leftArmMotor");
+        rightArmMotor = hardwareMap.dcMotor.get("rightArmMotor");
 
-        // leftServo = hardwareMap.servo.get("leftServo");
-       //  rightServo = hardwareMap.servo.get("rightServo");
+         leftServo = hardwareMap.servo.get("leftServo");
+         rightServo = hardwareMap.servo.get("rightServo");
 
         // This would also be where you reverse the direction of a motor
 
@@ -55,26 +58,29 @@ public class Teleop extends OpMode {
         // exampleMotor.setPower(gamepad1.left_stick_y);
 
         // If you have multiple motors and you want to set them both to the same joystick, use a variable
-        double forward = -.60*gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x;
+        double forward = -.40*gamepad1.left_stick_y;
+        double strafe = .40*gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
-
+        double arm = .20*gamepad2.left_stick_y;
 
         frontRightMotor.setPower(forward - strafe - turn);
         backRightMotor.setPower(forward + strafe - turn);
         frontLeftMotor.setPower(-forward - strafe - turn);
         backLeftMotor.setPower(-forward + strafe - turn);
-
+        leftArmMotor.setPower(arm);
+        rightArmMotor.setPower(-arm);
 
         // To move a servo, use an if statement
 
         // The first if statement sets the servo's position to 1 if "a" is pressed
-       // if (gamepad1.a){
-         //   leftServo.setPosition(1);
-       // }
-      //  if (gamepad1.b){
-        //    rightServo.setPosition(0);
-      //  }
+         if (gamepad2.a){
+             leftServo.setPosition(.25);
+             rightServo.setPosition(0);
+        }
+         if (gamepad2.b){
+             leftServo.setPosition(.25);
+             rightServo.setPosition(0);
+        }
 
         // This bracket closes the loop
     }
